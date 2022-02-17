@@ -10,7 +10,7 @@ require 'json'
 
 puts 'creating movies'
 
-url = 'http://tmdb.lewagon.com/movie/upcoming'
+url = 'http://tmdb.lewagon.com/movie/popular'
 
 buffer = URI.open(url).read
 
@@ -20,8 +20,8 @@ result['results'].each do |movie|
   Movie.create!(
     title: movie['title'],
     overview: movie['overview'],
-    rating: movie['vote_average.floor'],
-    poster_url: movie["https://image.tmdb.org/t/p/w500#{movie['poster_path']}"]
+    rating: movie['vote_average'].floor,
+    poster_url: "https://image.tmdb.org/t/p/original#{movie['poster_path']}"
   ) unless Movie.where('title = ?', movie['title']).size > 0
 end
 
