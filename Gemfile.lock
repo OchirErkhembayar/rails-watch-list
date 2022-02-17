@@ -60,6 +60,8 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    autoprefixer-rails (10.2.5.0)
+      execjs (< 2.8.0)
     bindex (0.8.1)
     bootsnap (1.10.3)
       msgpack (~> 1.2)
@@ -69,7 +71,10 @@ GEM
     crass (1.0.6)
     diff-lcs (1.5.0)
     erubi (1.10.0)
+    execjs (2.7.0)
     ffi (1.15.5)
+    font-awesome-sass (5.15.1)
+      sassc (>= 1.11)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.10.0)
@@ -166,6 +171,9 @@ GEM
       sprockets-rails
       tilt
     semantic_range (3.0.0)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     spring (4.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -200,8 +208,10 @@ PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
+  autoprefixer-rails (= 10.2.5)
   bootsnap (>= 1.4.4)
   byebug
+  font-awesome-sass (~> 5.15)
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)
@@ -211,6 +221,7 @@ DEPENDENCIES
   rails-controller-testing
   rspec-rails
   sass-rails (>= 6)
+  simple_form
   spring
   turbolinks (~> 5)
   tzinfo-data
