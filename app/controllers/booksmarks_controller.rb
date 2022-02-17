@@ -1,2 +1,0 @@
-class BooksmarksController < ApplicationController
-end

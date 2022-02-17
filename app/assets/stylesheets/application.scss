@@ -11,3 +11,54 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+body {
+  background-color: aliceblue;
+}
+
+.container {
+  width: 1300px;
+  margin: 0 auto;
+}
+
+.review {
+  padding: 0px 44px;
+}
+
+.navbar-lewagon {
+  justify-content: space-between;
+  background: white;
+  .navbar-collapse {
+    flex-grow: 0;
+  }
+  .navbar-brand img {
+    width: 40px;
+  }
+}
+
+.footer {
+  background: #F4F4F4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  padding: 0px 50px;
+  color: rgba(0,0,0,0.3);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  a {
+    color: black;
+    opacity: 0.15;
+    text-decoration: none;
+    font-size: 24px;
+    padding: 0px 10px;
+  }
+  a:hover {
+    opacity: 1;
+  }
+  .fa-heart {
+    color: #D23333;
+  }
+}

@@ -1,0 +1,75 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+  <div class="container">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
+
+<div class="container pb-4 pt-3">
+  <div class="row d-flex justify-content-between">
+    <div class="col-12 col-sm-6 col-lg-8">
+      <div class="container">
+        <div class="row d-flex flex-wrap">
+          <% @bookmarks.each do |bookmark| %>
+            <% movie = Movie.where('id = ?', bookmark.movie_id).first %>
+            <div class="col-12 col-sm-6 col-lg-4 mx-2">
+              <div class="card-trip my-3">
+                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                <div class="card-trip-infos">
+                  <div>
+                    <h2 class="pb-1"><%= movie.title %> - <%= movie.rating %></h2>
+                    <p><%= movie.overview %></p>
+                  </div>
+                </div>
+                <div class="card-trip-infos pb-2">
+                  <h2 class="card-trip-pricing"><%= bookmark.comment %></h2>
+                  <p><%= link_to 'Delete', bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3 d-flex justify-content-right">
+       <div class="container mt-2">
+          <%= simple_form_for [ @list, @bookmark ] do |f| %>
+            <div class="form-group mb-3">
+              <%= f.input :comment, class: "form-control" %>
+            </div>
+            <div class="form-group mb-3">
+              <%= f.association :movie, class: "form-control" %>
+            </div>
+            <%= f.submit "Submit bookmark", class: "btn btn-primary mb-3 w-100" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container review py-5 my-2 border-top">
+  <div class="row d-flex justify-content-between">
+    <div class="col-7">
+      <h2 class="text-center">Reviews</h2>
+      <% @reviews.each do |review| %>
+        <div class="card-product mb-4">
+          <div class="card-product-infos">
+            <h2><%= review.rating %></h2>
+            <p><%= review.content %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-5">
+      <h2 class="text-center">Submit a review</h2>
+      <%= simple_form_for [ @list, @review ] do |f| %>
+            <div class="form-group mb-3">
+              <%= f.input :rating, class: "form-control" %>
+            </div>
+            <div class="form-group mb-3">
+              <%= f.input :content, class: "form-control" %>
+            </div>
+            <%= f.submit "Submit review", class: "btn btn-primary mb-3 w-100" %>
+          <% end %>
+    </div>
+  </div>
+</div>

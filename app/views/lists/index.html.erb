@@ -1,0 +1,26 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+  <div class="container">
+    <h1>Archer's Watch List</h1>
+    <p>Save any movie to a custom list.</p>
+    <%= link_to "Creat new list", new_list_path, class: "btn btn-flat" %>
+  </div>
+</div>
+
+<div class="container">
+  <form class="form-inline d-flex mt-3">
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="text" class="sr-only">Search</label>
+      <input name="query" type="text" class="form-control" id="inputPassword2" placeholder="Flat name">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Search</button>
+  </form>
+  <div class="row d-flex flex-wrap">
+    <% @lists.each do |list| %>
+      <div class="col-12 col-sm-6 col-lg-3 mx-2">
+        <div class="card-category mx-2 my-3" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+          <%= link_to list.name, list_path(list) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
