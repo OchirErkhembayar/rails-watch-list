@@ -8,9 +8,15 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(set_review)
     @list = List.find(params[:list_id])
+    @bookmarks = @list.bookmarks
+    @bookmark = Bookmark.new
+    @reviews = @list.reviews
     @review.list = @list
-    @review.save
-    redirect_to list_path(@list)
+    if @review.save
+      redirect_to list_path(@list)
+    else
+      render 'lists/show'
+    end
   end
 
   def destroy
