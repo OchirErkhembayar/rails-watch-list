@@ -16,7 +16,7 @@
                 <%= image_tag "#{movie.poster_url}" %>
                 <div class="card-trip-infos">
                   <div>
-                    <h2 class="pb-1"><%= movie.title %> - <%= movie.rating %></h2>
+                    <h2 class="pb-1"><%= movie.title %> - <i class="fa-solid fa-star"></i> <%= movie.rating %></h2>
                     <p><%= movie.overview.length < 110 ? movie.overview : "#{movie.overview.first(114)}..." %></p>
                   </div>
                 </div>
@@ -50,9 +50,9 @@
       <h2 class="text-center">Reviews</h2>
       <% @reviews.each do |review| %>
         <div class="card-product mb-4">
-          <div class="card-product-infos">
-            <h2><%= review.rating %></h2>
-            <p><%= review.content %></p>
+          <div class="card-product-infos ps-3">
+            <h2>Rating: <%= review.rating %></h2>
+            <p class="review-text"><%= review.content %></p>
           </div>
         </div>
       <% end %>

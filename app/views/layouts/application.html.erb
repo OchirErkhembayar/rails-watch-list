@@ -6,15 +6,16 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-      <div class="container-fluid">
-        <%= link_to "#", class: "navbar-brand" do %>
-          <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+      <div class="container-fluid container">
+        <%= link_to lists_path, class: "navbar-brand" do %>
+          <%= image_tag "https://scontent-lhr8-2.xx.fbcdn.net/v/t1.6435-9/51552770_10212999090319648_8119647948104531968_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeFfZ9TW5agYrLoqkXN53AfgSYLzcK90kD9JgvNwr3SQP62VrlBDVcb_JvJJ87FEiXs&_nc_ohc=px4Kkkp3PhIAX8gg4Mp&_nc_ht=scontent-lhr8-2.xx&oh=00_AT8i13wkdJRImURUiq-yR8S6yUZbwVl3Q17sdjy9o0q0Vw&oe=6234F0C0", class: "avatar-large", alt: "avatar-large" %>
         <% end %>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,11 +51,11 @@
     <%= yield %>
     <div class="footer">
       <div class="footer-links">
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.github.com" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
       </div>
       <div class="footer-copyright">
         This footer is made with <i class="fas fa-heart"></i> at Le Wagon

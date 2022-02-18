@@ -7,17 +7,22 @@
 </div>
 
 <div class="container">
-  <form class="form-inline d-flex mt-3">
-    <div class="form-group mx-sm-3 mb-2">
-      <label for="text" class="sr-only">Search</label>
-      <input name="query" type="text" class="form-control" id="inputPassword2" placeholder="Filter lists">
-    </div>
-    <button type="submit" class="btn btn-primary mb-2">Search</button>
-  </form>
+  <div class="d-flex">
+    <form class="form-inline d-flex mt-3">
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="text" class="sr-only">Search</label>
+        <input name="query" type="text" class="form-control" id="inputPassword2" placeholder="Filter lists">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </form>
+    <form class="form-inline d-flex mt-3">
+      <button type="submit" class="btn btn-primary mb-2 ms-3">Refresh</button>
+    </form>
+  </div>
   <div class="row d-flex flex-wrap">
     <% @lists.each do |list| %>
       <div class="col-12 col-sm-6 col-lg-3">
-        <div class="card-category ms-2 my-3" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+        <div class="card-category ms-2 my-3" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://static1.pointsinfocus.com/2009/08/31/popcorn-poster-shooting-the-image/20090830-0014.jpg)">
           <%= link_to list.name, list_path(list) %>
         </div>
       </div>
