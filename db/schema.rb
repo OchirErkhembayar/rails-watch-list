@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 2022_02_17_201401) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.string "comment"
-    t.bigint "movie_id"
-    t.bigint "list_id"
+    t.bigint "movie_id", null: false
+    t.bigint "list_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["list_id"], name: "index_bookmarks_on_list_id"
@@ -49,5 +49,7 @@ ActiveRecord::Schema.define(version: 2022_02_17_201401) do
     t.index ["list_id"], name: "index_reviews_on_list_id"
   end
 
+  add_foreign_key "bookmarks", "lists"
+  add_foreign_key "bookmarks", "movies"
   add_foreign_key "reviews", "lists"
 end
