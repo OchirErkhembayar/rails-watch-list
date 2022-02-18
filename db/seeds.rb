@@ -10,7 +10,7 @@ require 'json'
 
 puts 'creating movies'
 
-url = 'http://tmdb.lewagon.com/movie/upcoming'
+url = 'http://tmdb.lewagon.com/movie/top_rated'
 
 buffer = URI.open(url).read
 

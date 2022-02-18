@@ -1,14 +1,21 @@
+<div class="container text-center mt-3"><p>Add a banner photo (~1200px width) and a card photo (~300px width)</p></div>
+
 <div class="container m-4">
-    <%= form_for(@list) do |f| %>
-      <div class="form-label mb-3">
-        <%= f.label :name, class: "form-control" %>
+    <%= simple_form_for(@list) do |f| %>
+      <div class="form-label mb-1">
+        <%= f.label :name, class: "form-label" %>
       </div>
       <div class="form-group mb-3">
         <%= f.text_field :name, class: "form-control" %>
       </div>
       <div class="form-group mb-3">
-        <%= f.input :photo, as: :file, class: "form-control" %>
+        <label for="exampleInputEmail1" class="form-label">Banner Photo</label>
+        <%= f.input :photob, as: :file, class: "form-control" %>
       </div>
-        <%= f.submit "Create List", class: "btn btn-primary mb-3" %>
+      <div class="form-group mb-3">
+        <label for="exampleInputEmail1" class="form-label">Card Photo</label>
+        <%= f.input :photoc, as: :file, class: "form-control" %>
+      </div>
+      <%= f.submit "Create List", class: "btn btn-primary mb-3" %>
     <% end %>
 </div>
