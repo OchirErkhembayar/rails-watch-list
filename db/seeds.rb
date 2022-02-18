@@ -16,13 +16,20 @@ buffer = URI.open(url).read
 
 result = JSON.parse(buffer)
 
+puts result['results']
+
 result['results'].each do |movie|
+  puts 'creating movie'
+  puts movie['title']
   Movie.create!(
     title: movie['title'],
     overview: movie['overview'],
     rating: movie['vote_average'].floor,
     poster_url: "https://image.tmdb.org/t/p/original#{movie['poster_path']}"
-  ) unless Movie.where('title = ?', movie['title']).size > 0
+  ) unless Movie.where('title = ?', movie['title']).size.positive?
+  if Movie.create!
+    puts 'created movie'
+  end
 end
 
 puts 'created movies'
