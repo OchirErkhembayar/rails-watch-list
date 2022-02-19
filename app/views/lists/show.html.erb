@@ -1,4 +1,8 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url('<%= cl_image_path @list.photob.key, height: 300, crop: :fill %>');">
+<% if @list.photob.key %>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url('<%= cl_image_path @list.photob.key, height: 300, crop: :fill %>');">
+<% else %>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url('https://wallpapercave.com/wp/wp2411501.jpg');">
+<% end %>
   <div class="container">
     <h1><%= @list.name %></h1>
   </div>
@@ -10,24 +14,22 @@
       <div class="container">
         <div class="row d-flex flex-wrap">
           <% @bookmarks.each do |bookmark| %>
-            <% movie = Movie.where('id = ?', bookmark.movie_id).first %>
-            <% bookmark_id = bookmark.id %>
             <div class="col-12 col-sm-6 col-lg-4 mx-2">
               <div class="card-trip my-3">
-                <%= image_tag "#{movie.poster_url}" %>
+                <%= image_tag "#{bookmark.poster_url}" %>
                 <div class="card-trip-infos">
                   <div>
-                    <h2 class="pb-1"><%= movie.title %> <i class="fas fa-star" style="color: gold;"></i> <%= movie.rating %></h2>
-                    <p><%= movie.overview.length < 100 ? movie.overview : "#{movie.overview.first(100)}..." %></p>
+                    <h2 class="pb-1"><%= bookmark.title %> <i class="fas fa-star" style="color: gold;"></i> <%= bookmark.rating %></h2>
+                    <p><%= bookmark.overview.length < 100 ? bookmark.overview : "#{bookmark.overview.first(100)}..." %></p>
                   </div>
                 </div>
                 <div class="card-trip-infos pb-2 align-items-center">
                   <h2 class="card-trip-pricing p-2"><i class="fas fa-quote-left"></i> &nbsp; <%= "#{bookmark.comment.first(23)}.." %></h2>
-                  <button type="button" class="my-button"data-bs-toggle="modal" data-bs-target="#i<%= bookmark_id.to_s %>">
-                  Enlarge
+                  <button type="button" class="my-button"data-bs-toggle="modal" data-bs-target="#i<%= bookmark.id.to_s %>">
+                  More info
                   </button>
                   <!-- Modal -->
-                  <div class="modal fade" id="i<%= bookmark_id.to_s %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="i<%= bookmark.id.to_s %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -36,11 +38,11 @@
                         </div>
                         <div class="modal-body">
                           <div class="card-trip my-3" style="height: 800px">
-                              <%= image_tag "#{movie.poster_url}", style: "height: 400px;" %>
+                              <%= image_tag "#{bookmark.poster_url}", style: "height: 400px;" %>
                               <div class="card-trip-infos">
                                 <div>
-                                  <h2 class="pb-1"><%= movie.title %> <i class="fas fa-star" style="color: gold;"></i> <%= movie.rating %></h2>
-                                  <p><%= movie.overview %></p>
+                                  <h2 class="pb-1"><%= bookmark.title %> <i class="fas fa-star" style="color: gold;"></i> <%= bookmark.rating %></h2>
+                                  <p><%= bookmark.overview %></p>
                                 </div>
                               </div>
                               <div class="card-trip-infos pb-2 align-items-center">
@@ -55,7 +57,7 @@
                     </div>
                   </div>
                   <%# MODAL %>
-                  <p><%= link_to 'Delete', bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" } %></p>
+                  <p><%= link_to 'Delete', bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %></p>
                 </div>
               </div>
             </div>
@@ -64,20 +66,73 @@
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-3 me-4 mt-2">
-      <%= simple_form_for [ @list, @bookmark ] do |f| %>
-        <div class="form-group mb-3">
-          <%= f.association :movie, class: "form-control" %>
+      <h5 class="pt-2">Add a movie</h5>
+      <form class="form d-flex justify-content-between mt-3">
+        <div class="form-group mb-2">
+          <label for="text" class="sr-only">Search Movies</label>
+          <input name="movie" type="text" class="form-control" id="inputPassword2" placeholder="Movie title">
         </div>
-        <div class="form-group mb-3">
-          <%= f.input :comment, class: "form-control", placeholder: "Comment here" %>
-        </div>
-        <%= f.submit "Submit bookmark", class: "btn btn-primary mb-3 w-100" %>
+        <button type="submit" class="btn btn-primary mb-2">Search</button>
+      </form>
+      <%= link_to "Refresh", list_path(@list), class: "btn btn-primary mb-2 w-100" %>
+      <% if @search_results %>
+        <% @search_results.first(5).each do |movie| %>
+          <div class="card-trip">
+            <% if movie["poster_path"] != nil %>
+              <%= image_tag "https://image.tmdb.org/t/p/w500#{movie["poster_path"]}" %>
+            <% else %>
+              <img src="https://i.pinimg.com/originals/d8/6a/e5/d86ae5d9960b9d131ab64353f237fa79.jpg" style="height: 140px;"/>
+            <% end %>
+            <div class="card-trip-infos">
+              <div>
+                <h2 class="pb-1"><%= movie["title"] %> <i class="fas fa-star" style="color: gold;"></i> <%= movie["vote_average"] %></h2>
+                <p><%= movie["overview"].length < 100 ? movie["overview"] : "#{movie["overview"].first(100)}..." %></p>
+              </div>
+              <button type="button" class="my-button"data-bs-toggle="modal" data-bs-target="#i<%= movie["id"].to_s %>">
+                  More info
+              </button>
+              <!-- Modal -->
+                <div class="modal fade" id="i<%= movie["id"].to_s %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Movie</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card-trip my-3" style="height: 1000px">
+                            <%= image_tag "https://image.tmdb.org/t/p/w500#{movie["poster_path"]}", style: "height: 650px;" %>
+                            <div class="card-trip-infos" style="display: block;">
+                              <div class="d-flex flex-column">
+                                <div>
+                                  <h2 class="pb-1"><%= movie["title"] %> <i class="fas fa-star" style="color: gold;"></i> <%= movie["vote_average"] %></h2>
+                                  <p><%= movie["overview"] %></p>
+                                </div>
+                                <%= simple_form_for [ @list, @bookmark ] do |f| %>
+                                  <%= f.hidden_field :overview, value: movie["overview"] %>
+                                  <%= f.hidden_field :title, value: movie["title"] %>
+                                  <%= f.hidden_field :poster_url, value: "https://image.tmdb.org/t/p/w500#{movie["poster_path"]}" %>
+                                  <%= f.hidden_field :rating, value: movie["vote_average"].to_f %>
+                                  <div class="form-group mb-3">
+                                    <%= f.input :comment, class: "form-control", placeholder: "Comment here" %>
+                                  </div>
+                                  <%= f.submit "Submit bookmark", class: "btn btn-primary mb-3 w-100" %>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%# MODAL %>
+            </div>
+          </div>
+        <% end %>
       <% end %>
-      <div class="form-group mb-2">
-        <label for="text" class="sr-only">Hello</label>
-        <input name="title" type="text" class="form-control my-3" id="inputPassword2" placeholder="Search movies">
-        <button type="submit" class="btn btn-primary mb-2 w-100">Search</button>
-      </div>
     </div>
   </div>
 </div>

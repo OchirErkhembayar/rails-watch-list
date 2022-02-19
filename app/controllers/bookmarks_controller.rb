@@ -12,6 +12,7 @@ class BookmarksController < ApplicationController
     @bookmarks = @list.bookmarks
     @reviews = @list.reviews
     @bookmark.list = @list
+    @bookmark.save
     if @bookmark.save
       redirect_to list_path(@list)
     else
@@ -31,6 +32,6 @@ class BookmarksController < ApplicationController
   end
 
   def set_bookmark
-    params.require(:bookmark).permit(:comment, :movie_id)
+    params.require(:bookmark).permit(:comment, :rating, :overview, :poster_url, :title)
   end
 end

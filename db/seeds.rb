@@ -24,7 +24,7 @@ result['results'].each do |movie|
   Movie.create!(
     title: movie['title'],
     overview: movie['overview'],
-    rating: movie['vote_average'].floor,
+    rating: movie['vote_average'],
     poster_url: "https://image.tmdb.org/t/p/original#{movie['poster_path']}"
   ) unless Movie.where('title = ?', movie['title']).size.positive?
   if Movie.create!

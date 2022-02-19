@@ -1,5 +1,8 @@
+require 'open-uri'
+require 'json'
+
 class ListsController < ApplicationController
-  before_action :find_list, only: %i[show]
+  before_action :find_list, only: %i[show destroy]
   def index
     if params[:query]
       @lists = List.where("name iLIKE ?", "%#{params[:query]}%")
@@ -13,6 +16,10 @@ class ListsController < ApplicationController
     @bookmarks = Bookmark.where('list_id = ?', @list.id)
     @bookmark = Bookmark.new
     @review = Review.new
+    if params[:movie]
+      object = find_movies(params[:movie])
+      @search_results = object['results']
+    end
   end
 
   def new
@@ -29,12 +36,18 @@ class ListsController < ApplicationController
     end
   end
 
-  def find_movies
-    query = params[:movie]
-    url = "http://tmdb.lewagon.com/search/movie?&query=#{}"
+  def destroy
+    @list.destroy
+    redirect_to root_path
   end
 
   private
+
+  def find_movies(query)
+    url = "http://tmdb.lewagon.com/search/movie?&query=#{query}"
+    buffer = URI.open(url).read
+    JSON.parse(buffer)
+  end
 
   def find_list
     @list = List.find(params[:id])
