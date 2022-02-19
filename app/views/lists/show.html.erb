@@ -22,7 +22,7 @@
                   </div>
                 </div>
                 <div class="card-trip-infos pb-2 align-items-center">
-                  <h2 class="card-trip-pricing p-2"><i class="fas fa-quote-left"></i> &nbsp; <%= bookmark.comment.first(15) %></h2>
+                  <h2 class="card-trip-pricing p-2"><i class="fas fa-quote-left"></i> &nbsp; <%= "#{bookmark.comment.first(23)}.." %></h2>
                   <button type="button" class="my-button"data-bs-toggle="modal" data-bs-target="#i<%= bookmark_id.to_s %>">
                   Enlarge
                   </button>
