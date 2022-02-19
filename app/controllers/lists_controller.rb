@@ -29,6 +29,11 @@ class ListsController < ApplicationController
     end
   end
 
+  def find_movies
+    query = params[:movie]
+    url = "http://tmdb.lewagon.com/search/movie?&query=#{}"
+  end
+
   private
 
   def find_list

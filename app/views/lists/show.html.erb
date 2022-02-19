@@ -22,7 +22,7 @@
                   </div>
                 </div>
                 <div class="card-trip-infos pb-2 align-items-center">
-                  <h2 class="card-trip-pricing p-2"><i class="fas fa-quote-left"></i> &nbsp; <%= bookmark.comment %></h2>
+                  <h2 class="card-trip-pricing p-2"><i class="fas fa-quote-left"></i> &nbsp; <%= bookmark.comment.first(15) %></h2>
                   <button type="button" class="my-button"data-bs-toggle="modal" data-bs-target="#i<%= bookmark_id.to_s %>">
                   Enlarge
                   </button>
@@ -73,6 +73,11 @@
         </div>
         <%= f.submit "Submit bookmark", class: "btn btn-primary mb-3 w-100" %>
       <% end %>
+      <div class="form-group mb-2">
+        <label for="text" class="sr-only">Hello</label>
+        <input name="title" type="text" class="form-control my-3" id="inputPassword2" placeholder="Search movies">
+        <button type="submit" class="btn btn-primary mb-2 w-100">Search</button>
+      </div>
     </div>
   </div>
 </div>
