@@ -16,7 +16,11 @@
           <% @bookmarks.each do |bookmark| %>
             <div class="col-12 col-sm-6 col-lg-4 mx-2">
               <div class="card-trip my-3">
-                <%= image_tag "#{bookmark.poster_url}" %>
+                <% if bookmark.poster_url.length > 31 %>
+                  <%= image_tag "#{bookmark.poster_url}" %>
+                <% else %>
+                  <img src="https://i.pinimg.com/originals/d8/6a/e5/d86ae5d9960b9d131ab64353f237fa79.jpg" style="height: 200px;"/>
+                <% end %>
                 <div class="card-trip-infos">
                   <div>
                     <h2 class="pb-1"><%= bookmark.title %> <i class="fas fa-star" style="color: gold;"></i> <%= bookmark.rating %></h2>
