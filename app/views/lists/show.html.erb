@@ -74,14 +74,14 @@
         </div>
         <button type="submit" class="btn btn-primary mb-2">Search</button>
       </form>
-      <%= link_to "Refresh", list_path(@list), class: "btn btn-primary mb-2 w-100" %>
+      <%= link_to "Refresh", list_path(@list), class: "btn btn-primary w-100" %>
       <% if @search_results %>
         <% @search_results.first(5).each do |movie| %>
-          <div class="card-trip">
+          <div class="card-trip mt-3">
             <% if movie["poster_path"] != nil %>
               <%= image_tag "https://image.tmdb.org/t/p/w500#{movie["poster_path"]}" %>
             <% else %>
-              <img src="https://i.pinimg.com/originals/d8/6a/e5/d86ae5d9960b9d131ab64353f237fa79.jpg" style="height: 140px;"/>
+              <img src="https://i.pinimg.com/originals/d8/6a/e5/d86ae5d9960b9d131ab64353f237fa79.jpg" style="height: 200px;"/>
             <% end %>
             <div class="card-trip-infos">
               <div>
