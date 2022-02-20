@@ -32,6 +32,6 @@ class BookmarksController < ApplicationController
   end
 
   def set_bookmark
-    params.require(:bookmark).permit(:comment, :overview, :poster_url, :title)
+    params.require(:bookmark).permit(:comment, :overview, :poster_url, :title, :rating)
   end
 end
