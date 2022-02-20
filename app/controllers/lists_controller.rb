@@ -14,6 +14,9 @@ class ListsController < ApplicationController
   def show
     @reviews = Review.where('list_id = ?', @list.id)
     @bookmarks = Bookmark.where('list_id = ?', @list.id)
+    if params[:filter]
+      @bookmarks = Bookmark.where("title iLIKE ?", "%#{params[:filter]}%").where('list_id = ?', @list.id)
+    end
     @bookmark = Bookmark.new
     @review = Review.new
     if params[:movie]

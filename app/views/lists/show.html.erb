@@ -70,6 +70,17 @@
       </div>
     </div>
     <div class="col-12 col-sm-6 col-lg-3 me-4 mt-2">
+      <h5 class="mt-2">Filter movies</h5>
+      <form class="form-inline d-flex justify-content-between mt-3">
+        <div class="form-group mb-2">
+          <label for="text" class="sr-only">Search</label>
+          <input name="filter" type="text" class="form-control" id="inputPassword2" placeholder="Filter lists">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Search</button>
+      </form>
+      <form class="form-inline d-flex">
+        <button type="submit" class="btn btn-primary mb-2">Refresh</button>
+      </form>
       <h5 class="pt-2">Add a movie</h5>
       <form class="form d-flex justify-content-between mt-3">
         <div class="form-group mb-2">
@@ -105,7 +116,11 @@
                       </div>
                       <div class="modal-body">
                         <div class="card-trip my-3" style="height: 1000px">
-                            <%= image_tag "https://image.tmdb.org/t/p/w500#{movie["poster_path"]}", style: "height: 650px;" %>
+                            <% if movie["poster_path"] != nil %>
+                              <%= image_tag "https://image.tmdb.org/t/p/w500#{movie["poster_path"]}", style: "height: 650px;" %>
+                            <% else %>
+                              <img src="https://i.pinimg.com/originals/d8/6a/e5/d86ae5d9960b9d131ab64353f237fa79.jpg" style="height: 650px;"/>
+                            <% end %>
                             <div class="card-trip-infos" style="display: block;">
                               <div class="d-flex flex-column">
                                 <div>
