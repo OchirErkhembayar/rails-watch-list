@@ -104,7 +104,7 @@
                 <p><%= movie["overview"].length < 100 ? movie["overview"] : "#{movie["overview"].first(100)}..." %></p>
               </div>
               <button type="button" class="my-button"data-bs-toggle="modal" data-bs-target="#i<%= movie["id"].to_s %>">
-                  More info
+                  Add this movie
               </button>
               <!-- Modal -->
                 <div class="modal fade" id="i<%= movie["id"].to_s %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
