@@ -24,18 +24,20 @@
                 <div class="card-trip-infos">
                   <div>
                     <h2 class="pb-1"><%= bookmark.title %> <i class="fas fa-star" style="color: gold;"></i> <%= bookmark.rating %></h2>
-                    <p><%= bookmark.overview.length < 100 ? bookmark.overview : "#{bookmark.overview.first(100)}..." %></p>
+                    <p><%= bookmark.overview.length < 100 ? bookmark.overview : "#{bookmark.overview.first(110)}..." %></p>
                   </div>
                 </div>
                 <div class="card-trip-infos pb-2 align-items-center">
                   <% if bookmark.comment.length > 0 %>
                     <h2 class="card-trip-pricing p-2"><i class="fas fa-quote-left"></i> &nbsp; <%= "#{bookmark.comment.first(23)}.." %></h2>
+                    </button><button type="button" class="my-button"data-bs-toggle="modal" data-bs-target="#i<%= bookmark.id.to_s %>">
+                      More info
+                    </button>
                   <% else %>
                     <h2 class="card-trip-pricing p-2"><i class="fas fa-quote-left"></i> &nbsp; Add quote (coming soon)</h2>
-                  <button type="button" class="my-button"data-bs-toggle="modal" data-bs-target="#i<%= bookmark.id.to_s %>">
-                  More info
+                    <button type="button" class="my-button"data-bs-toggle="modal" data-bs-target="#i<%= bookmark.id.to_s %>">
+                      More info
                   <% end %>
-                  </button>
                   <!-- Modal -->
                   <div class="modal fade" id="i<%= bookmark.id.to_s %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
